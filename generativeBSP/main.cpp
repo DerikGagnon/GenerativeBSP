@@ -6,14 +6,11 @@
 //  Copyright © 2019 Derik Gagnon. All rights reserved.
 //
 
-#include <iostream>
-#include <iomanip>
-#include <string>
 #include "BSP.hpp"
 
-const int HEIGHT = 50, WIDTH = 50;
-
 int main() {
+    
+    std::srand(time(NULL));
     
     std::string world[HEIGHT][WIDTH];
     
