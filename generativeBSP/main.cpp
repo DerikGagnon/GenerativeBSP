@@ -7,10 +7,30 @@
 //
 
 #include <iostream>
+#include <iomanip>
+#include <string>
 #include "BSP.hpp"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...s
-    std::cout << "Hello, World!\n";
+const int HEIGHT = 50, WIDTH = 50;
+
+int main() {
+    
+    std::string world[HEIGHT][WIDTH];
+    
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            world[i][j] = "#";
+        }
+    }
+    
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            std::cout << world[i][j];
+        }
+        std::cout << "\n";
+    }
+    
+    
+    std::cin.get();
     return 0;
 }

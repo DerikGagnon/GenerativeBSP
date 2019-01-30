@@ -7,3 +7,11 @@
 //
 
 #include "BSP.hpp"
+
+void Node::setWidth(int width) {
+    mWidth = width;
+}
+
+void Node::setHeight(int height) {
+    mHeight = height;
+}

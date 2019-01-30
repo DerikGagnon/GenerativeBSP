@@ -11,4 +11,20 @@
 
 #include <stdio.h>
 
+class Node {
+private:
+    int mHeight, mWidth;
+    Node * mLChild = NULL, * mRChild = NULL;
+    
+public:
+    int getHeight(){return mHeight;}
+    int getWidth(){return mWidth;}
+    void setHeight(int height);
+    void setWidth(int width);
+};
+
+class BspTree {
+    
+};
+
 #endif /* BSP_hpp */
