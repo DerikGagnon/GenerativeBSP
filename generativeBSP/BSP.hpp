@@ -16,19 +16,21 @@
 #include <string>
 
 const int HEIGHT = 50, WIDTH = 50;
-const int MINIMUM_SIZE = (HEIGHT / 4) * (WIDTH / 4);
+const int MINIMUM_WIDTH= (WIDTH / 4);
+const int MINIMUM_HEIGHT= (HEIGHT / 4);
 
 /* Node Class */
 class Node {
 private:
     int mTopLeftX, mTopLeftY, mBottomRightX, mBottomRightY;
-    Node * mLChild = NULL, * mRChild = NULL;
     
 public:
+    Node * mLChild, * mRChild;
     Node();
     Node(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY);
     int getHeight(){return std::abs(mTopLeftY - mBottomRightY);}
     int getWidth(){return std::abs(mTopLeftX - mBottomRightX);}
+    bool isTooSmall(){return getHeight() < MINIMUM_HEIGHT && getWidth() < MINIMUM_WIDTH;}
     int getTopLeftX(){return mTopLeftX;}
     int getTopLeftY(){return mTopLeftY;}
     int getBottomRightX(){return mBottomRightX;}
@@ -37,6 +39,7 @@ public:
     void setTopLeftY(int topLeftY);
     void setBottomRightX(int bottomRightX);
     void setBottomRightY(int bottomRightY);
+    bool isLeaf(){return mLChild == NULL;};
 };
 
 /* Binary Space Partition Tree Class */
@@ -44,7 +47,11 @@ class BspTree {
 private:
     Node root;
 public:
-    void split(Node node);
+    BspTree();
+    Node* getRoot(){return &root;};
+    void expand(int depth);
+    void visualize();
+    void draw(std::string map[HEIGHT][WIDTH]);
 };
 
 #endif /* BSP_hpp */

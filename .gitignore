@@ -15,10 +15,10 @@ xcuserdata/
 *.pyc
 
 
-#Python modules
-MANIFEST
+# code modules
 dist/
 build/
+.vscode
 
 # Backup files
 *~.nib
