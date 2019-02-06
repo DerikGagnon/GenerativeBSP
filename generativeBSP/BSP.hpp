@@ -16,29 +16,29 @@
 #include <string>
 
 const int HEIGHT = 50, WIDTH = 50;
-const int MINIMUM_WIDTH= (WIDTH / 4);
-const int MINIMUM_HEIGHT= (HEIGHT / 4);
+const int MINIMUM_WIDTH= (WIDTH / 5);
+const int MINIMUM_HEIGHT= (HEIGHT / 5);
 
 /* Node Class */
 class Node {
 private:
-    int mTopLeftX, mTopLeftY, mBottomRightX, mBottomRightY;
+    int mBottomLeftX, mBottomLeftY, mTopRightX, mTopRightY;
     
 public:
     Node * mLChild, * mRChild;
     Node();
-    Node(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY);
-    int getHeight(){return std::abs(mTopLeftY - mBottomRightY);}
-    int getWidth(){return std::abs(mTopLeftX - mBottomRightX);}
-    bool isTooSmall(){return getHeight() < MINIMUM_HEIGHT && getWidth() < MINIMUM_WIDTH;}
-    int getTopLeftX(){return mTopLeftX;}
-    int getTopLeftY(){return mTopLeftY;}
-    int getBottomRightX(){return mBottomRightX;}
-    int getBottomRightY(){return mBottomRightY;}
-    void setTopLeftX(int topLeftX);
-    void setTopLeftY(int topLeftY);
-    void setBottomRightX(int bottomRightX);
-    void setBottomRightY(int bottomRightY);
+    Node(int bottomLeftX, int bottomLeftY, int TopRightX, int TopRightY);
+    int getHeight(){return std::abs(mBottomLeftY - mTopRightY);}
+    int getWidth(){return std::abs(mBottomLeftX - mTopRightX);}
+    bool isTooBig(){return getHeight() > MINIMUM_HEIGHT && getWidth() > MINIMUM_WIDTH;}
+    int getBottomLeftX(){return mBottomLeftX;}
+    int getBottomLeftY(){return mBottomLeftY;}
+    int getTopRightX(){return mTopRightX;}
+    int getTopRightY(){return mTopRightY;}
+    void setBottomLeftX(int bottomLeftX);
+    void setBottomLeftY(int bottomLeftY);
+    void setTopRightX(int TopRightX);
+    void setTopRightY(int TopRightY);
     bool isLeaf(){return mLChild == NULL;};
 };
 
