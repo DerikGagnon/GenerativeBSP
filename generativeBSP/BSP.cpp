@@ -13,35 +13,35 @@
 Node::Node() {
     mLChild = NULL;
     mRChild = NULL;
-    mBottomLeftY = HEIGHT;
-    mBottomLeftX = WIDTH;
-    mTopRightY = 0;
-    mTopRightX = 0;
+    mTopRightY = HEIGHT;
+    mTopRightX = WIDTH;
+    mBottomLeftY = 0;
+    mBottomLeftX = 0;
 }
 
-Node::Node(int bottomLeftX, int bottomLeftY, int topRightX, int topRightY) {
+Node::Node(int topRightX, int topRightY, int bottomLeftX, int bottomLeftY) {
     mLChild = NULL;
     mRChild = NULL;
+    mTopRightY = topRightY;
+    mTopRightX = topRightX;
     mBottomLeftY = bottomLeftY;
     mBottomLeftX = bottomLeftX;
-    mTopRightY = topRightY;
+}
+
+void Node::setBottomLeftX(int topRightX) {
     mTopRightX = topRightX;
 }
 
-void Node::setBottomLeftX(int bottomLeftX) {
+void Node::setBottomLeftY(int topRightY) {
+    mTopRightY = topRightY;
+}
+
+void Node::setTopRightX(int bottomLeftX) {
     mBottomLeftX = bottomLeftX;
 }
 
-void Node::setBottomLeftY(int bottomLeftY) {
+void Node::setTopRightY(int bottomLeftY) {
     mBottomLeftY = bottomLeftY;
-}
-
-void Node::setTopRightX(int topRightX) {
-    mTopRightX = topRightX;
-}
-
-void Node::setTopRightY(int topRightY) {
-    mTopRightY = topRightY;
 }
 
 /* Binary Space Partition Tree Class Functions */
@@ -53,8 +53,8 @@ void Split(Node* node) {
     int delta, split;
     if (rand() % 2 == 0) {
             // Vertical Slice
-            int left_bound = node->getBottomLeftX();
-            int right_bound = node->getTopRightX();
+            int left_bound = node->getTopRightX();
+            int right_bound = node->getBottomLeftX();
             // std::cout << right_bound << " " << left_bound << std::endl;
             delta = right_bound - left_bound;
             split = rand() % delta;
@@ -62,20 +62,20 @@ void Split(Node* node) {
                 split = 11;
             }
             std::cout << "splitting vertically on " << split << std::endl;
-            node->mLChild = new Node(node->getBottomLeftX(), node->getBottomLeftY(), split, node->getTopRightY());
-            node->mRChild = new Node(split, node->getBottomLeftY(), node->getTopRightX(), node->getTopRightY());
+            node->mLChild = new Node(node->getTopRightX(), node->getTopRightY(), split, node->getBottomLeftY());
+            node->mRChild = new Node(split, node->getTopRightY(), node->getBottomLeftX(), node->getBottomLeftY());
     } else {
             // Horizontal Slice
-            int upper_bound = node->getBottomLeftY();
-            int lower_bound = node->getTopRightY();
+            int upper_bound = node->getTopRightY();
+            int lower_bound = node->getBottomLeftY();
             delta = upper_bound - lower_bound;
             split = rand() % delta;
             if (split < 10 ) {
                 split = 11;
             }
             std::cout << "splitting horizontally on " << split << std::endl;
-            node->mLChild = new Node(node->getBottomLeftX(), node->getBottomLeftY(), node->getTopRightX(), split);
-            node->mRChild = new Node(node->getBottomLeftX(), split, node->getTopRightX(), node->getTopRightY());
+            node->mLChild = new Node(node->getTopRightX(), node->getTopRightY(), node->getBottomLeftX(), split);
+            node->mRChild = new Node(node->getTopRightX(), split, node->getBottomLeftX(), node->getBottomLeftY());
     }
 }
 
