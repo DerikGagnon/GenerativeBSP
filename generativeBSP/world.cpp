@@ -28,8 +28,10 @@ void World::populate(Node* node) {
             emoji = emojis.top();
             emojis.pop();
         }
-        std::cout << "Node:" << emoji << " top right: (" << node->getTopRightX() << ", " << node->getTopRightY() << ")";
-        std::cout << " bottom left: (" << node->getBottomLeftX() << ", " << node->getBottomLeftY() << ")" << std::endl;
+        std::cout << "Node:" << emoji <<
+            " bottom left: (" << node->getBottomLeftX() << ", " << node->getBottomLeftY() << ")" <<
+            " top right: (" << node->getTopRightX() << ", " << node->getTopRightY() << ")" <<
+            std::endl;
         for (int h = node->getBottomLeftY(); h < node->getTopRightY(); h++) {
             for (int w = node->getBottomLeftX(); w < node->getTopRightX(); w++) {
                 map[w][h] = emoji;

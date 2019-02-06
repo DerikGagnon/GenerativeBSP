@@ -51,31 +51,25 @@ BspTree::BspTree() {
 
 void Split(Node* node) {
     int delta, split;
+    int minSide = MINIMUM_HEIGHT / 2; // provided min height and min width are equal
     if (rand() % 2 == 0) {
             // Vertical Slice
-            int left_bound = node->getTopRightX();
-            int right_bound = node->getBottomLeftX();
-            // std::cout << right_bound << " " << left_bound << std::endl;
-            delta = right_bound - left_bound;
-            split = rand() % delta;
-            if (split < 10) {
-                split = 11;
-            }
-            std::cout << "splitting vertically on " << split << std::endl;
+            do {
+                split = (rand() % node->getWidth()) + node->getBottomLeftX();
+                std::cout << "split " << node->getTopRightX() - split << std::endl;
+            } while (node->getTopRightX() - split < minSide || split - node->getBottomLeftX() < minSide);
             node->mLChild = new Node(node->getTopRightX(), node->getTopRightY(), split, node->getBottomLeftY());
             node->mRChild = new Node(split, node->getTopRightY(), node->getBottomLeftX(), node->getBottomLeftY());
+            std::cout << "splitting vertically on " << split << std::endl;
     } else {
             // Horizontal Slice
-            int upper_bound = node->getTopRightY();
-            int lower_bound = node->getBottomLeftY();
-            delta = upper_bound - lower_bound;
-            split = rand() % delta;
-            if (split < 10 ) {
-                split = 11;
-            }
-            std::cout << "splitting horizontally on " << split << std::endl;
+            do {
+                split = rand() % node->getHeight() + node->getBottomLeftY();
+                std::cout << "split " << node->getTopRightY() - split << std::endl;
+            } while (node->getTopRightY() - split < minSide || split - node->getBottomLeftY() < minSide);
             node->mLChild = new Node(node->getTopRightX(), node->getTopRightY(), node->getBottomLeftX(), split);
             node->mRChild = new Node(node->getTopRightX(), split, node->getBottomLeftX(), node->getBottomLeftY());
+            std::cout << "splitting horizontally on " << split << std::endl;
     }
 }
 

@@ -21,7 +21,7 @@ int main() {
     std::cout << root->getHeight() << " " << root->getWidth() << " " << root->mLChild  << std::endl;
     tree.expand(4);
     std::cout << root->getHeight() << " " << root->getWidth() << " " << root->mLChild->getHeight() << std::endl;
-    tree.visualize();
+    // tree.visualize();
     world.populate(root);
     world.draw();
 
