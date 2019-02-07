@@ -57,6 +57,14 @@ void Node::createRoom() {
         std::cout << "Potential: " << mRoomBLX << ", " << mRoomBLY << "  " << mRoomTRX << ", " << mRoomTRY << "\n";
         
     } while (((mRoomTRX - mRoomBLX) * (mRoomTRY - mRoomBLY)) <= area);
+    if (mRoomTRY == mTopRightY)
+        mRoomTRY--;
+    if (mRoomTRX == mTopRightX)
+        mRoomTRX--;
+    if (mRoomBLX == mBottomLeftX)
+        mRoomBLX++;
+    if (mRoomBLY == mBottomLeftY)
+        mRoomBLY++;
     std::cout << "Node: Bottom Left (" << mRoomBLX << ", " << mRoomBLY << ")\n";
     std::cout << "Node: Top Right (" << mRoomTRX << ", " << mRoomTRY << ")\n";
 }
