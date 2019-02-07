@@ -25,9 +25,11 @@ private:
     //members
     int mTopRightX, mTopRightY, mBottomLeftX, mBottomLeftY;
     int mRoomTRX, mRoomTRY, mRoomBLX, mRoomBLY;
-    
+    bool connected;
 public:
     Node * mLChild, * mRChild;
+    bool horizontal;
+    int mbridgeStartX, mbridgeStartY, mbridgeEndX, mbridgeEndY;
     
     //Constructors
     Node();
@@ -44,6 +46,7 @@ public:
     int getRoomBLY(){return mRoomBLY;}
     int getHeight(){return std::abs(mTopRightY - mBottomLeftY);}
     int getWidth(){return std::abs(mTopRightX - mBottomLeftX);}
+    bool isConnected() { return connected; };
     
     //setters
     void setBottomLeftX(int topRightX);
@@ -53,7 +56,8 @@ public:
     
     //utilities
     bool isTooBig(){return getHeight() > MINIMUM_HEIGHT && getWidth() > MINIMUM_WIDTH;}
-    bool isLeaf(){return mLChild == NULL;};
+    bool isLeaf(){return mLChild == NULL && mRChild == NULL;};
+    void connect() { connected = true; };
     void createRoom();
 };
 

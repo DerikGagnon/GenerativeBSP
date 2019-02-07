@@ -33,6 +33,7 @@ public:
     World();
     void populate(Node* node);
     void populateRooms(Node* node);
+    void connectRooms(Node* node, Node* parent);
     void fillCharMap();
     void draw();
     void drawCharMap();

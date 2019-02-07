@@ -11,6 +11,7 @@
 
 /* Node Class Functions */
 Node::Node() {
+    connected = false;
     mLChild = NULL;
     mRChild = NULL;
     mTopRightY = HEIGHT;
@@ -20,6 +21,7 @@ Node::Node() {
 }
 
 Node::Node(int topRightX, int topRightY, int bottomLeftX, int bottomLeftY) {
+    connected = false;
     mLChild = NULL;
     mRChild = NULL;
     mTopRightY = topRightY;
@@ -85,6 +87,7 @@ void Split(Node* node) {
             } while (node->getTopRightX() - split < minSide || split - node->getBottomLeftX() < minSide);
             node->mLChild = new Node(node->getTopRightX(), node->getTopRightY(), split, node->getBottomLeftY());
             node->mRChild = new Node(split, node->getTopRightY(), node->getBottomLeftX(), node->getBottomLeftY());
+            node->horizontal = false;
             std::cout << "splitting vertically on " << split << std::endl;
     } else {
             // Horizontal Slice
@@ -94,6 +97,7 @@ void Split(Node* node) {
             } while (node->getTopRightY() - split < minSide || split - node->getBottomLeftY() < minSide);
             node->mLChild = new Node(node->getTopRightX(), node->getTopRightY(), node->getBottomLeftX(), split);
             node->mRChild = new Node(node->getTopRightX(), split, node->getBottomLeftX(), node->getBottomLeftY());
+            node->horizontal = true;
             std::cout << "splitting horizontally on " << split << std::endl;
     }
 }
