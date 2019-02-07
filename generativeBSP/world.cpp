@@ -37,6 +37,7 @@ void World::populate(Node* node) {
                 map[w][h] = emoji;
             }
         }
+        node->createRoom();
         return;
     }
     populate(node->mLChild);

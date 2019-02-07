@@ -16,30 +16,41 @@
 #include <string>
 
 const int HEIGHT = 50, WIDTH = 50;
-const int MINIMUM_WIDTH= (WIDTH / 5);
-const int MINIMUM_HEIGHT= (HEIGHT / 5);
+const int MINIMUM_WIDTH= (WIDTH / 6);
+const int MINIMUM_HEIGHT= (HEIGHT / 6);
 
 /* Node Class */
 class Node {
 private:
+    //members
     int mTopRightX, mTopRightY, mBottomLeftX, mBottomLeftY;
+    int mRoomTRX, mRoomTRY, mRoomBLX, mRoomBLY;
     
 public:
     Node * mLChild, * mRChild;
+    
+    //Constructors
     Node();
     Node(int topRightX, int topRightY, int TopRightX, int TopRightY);
-    int getHeight(){return std::abs(mTopRightY - mBottomLeftY);}
-    int getWidth(){return std::abs(mTopRightX - mBottomLeftX);}
-    bool isTooBig(){return getHeight() > MINIMUM_HEIGHT && getWidth() > MINIMUM_WIDTH;}
+    
+    //getters
     int getTopRightX(){return mTopRightX;}
     int getTopRightY(){return mTopRightY;}
     int getBottomLeftX(){return mBottomLeftX;}
     int getBottomLeftY(){return mBottomLeftY;}
+    int getHeight(){return std::abs(mTopRightY - mBottomLeftY);}
+    int getWidth(){return std::abs(mTopRightX - mBottomLeftX);}
+    
+    //setters
     void setBottomLeftX(int topRightX);
     void setBottomLeftY(int topRightY);
     void setTopRightX(int TopRightX);
     void setTopRightY(int TopRightY);
+    
+    //utilities
+    bool isTooBig(){return getHeight() > MINIMUM_HEIGHT && getWidth() > MINIMUM_WIDTH;}
     bool isLeaf(){return mLChild == NULL;};
+    void createRoom();
 };
 
 /* Binary Space Partition Tree Class */

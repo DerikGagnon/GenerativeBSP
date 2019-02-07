@@ -19,7 +19,7 @@ int main() {
     BspTree tree = BspTree();
     Node* root = tree.getRoot();
     std::cout << root->getHeight() << " " << root->getWidth() << " " << root->mLChild  << std::endl;
-    tree.expand(4);
+    tree.expand(6);
     std::cout << root->getHeight() << " " << root->getWidth() << " " << root->mLChild->getHeight() << std::endl;
     // tree.visualize();
     world.populate(root);

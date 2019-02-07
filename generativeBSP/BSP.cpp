@@ -44,13 +44,30 @@ void Node::setTopRightY(int bottomLeftY) {
     mBottomLeftY = bottomLeftY;
 }
 
+void Node::createRoom() {
+    int area = (MINIMUM_WIDTH - 2) * (MINIMUM_HEIGHT - 2);
+    int deltaX = 0, deltaY = 0;
+    do {
+        deltaX = mTopRightX - (getWidth() / 2);
+        mRoomTRX = mTopRightX - (rand() % (mTopRightX - deltaX));
+        mRoomBLX = mBottomLeftX + (rand() % (deltaX - mBottomLeftX));
+        deltaY = mTopRightY - (getHeight() / 2);
+        mRoomTRY = mTopRightY - (rand() % (mTopRightY - deltaY));
+        mRoomBLY = mBottomLeftY + (rand() % (deltaY - mBottomLeftY));
+        std::cout << "Potential: " << mRoomBLX << ", " << mRoomBLY << "  " << mRoomTRX << ", " << mRoomTRY << "\n";
+        
+    } while (((mRoomTRX - mRoomBLX) * (mRoomTRY - mRoomBLY)) <= area);
+    std::cout << "Node: Bottom Left (" << mRoomBLX << ", " << mRoomBLY << ")\n";
+    std::cout << "Node: Top Right (" << mRoomTRX << ", " << mRoomTRY << ")\n";
+}
+
 /* Binary Space Partition Tree Class Functions */
 BspTree::BspTree() {
     root = Node();
 }
 
 void Split(Node* node) {
-    int delta, split;
+    int split;
     int minSide = MINIMUM_HEIGHT / 2; // provided min height and min width are equal
     if (rand() % 2 == 0) {
             // Vertical Slice
