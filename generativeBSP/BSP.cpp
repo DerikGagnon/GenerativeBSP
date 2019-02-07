@@ -45,7 +45,7 @@ void Node::setTopRightY(int bottomLeftY) {
 }
 
 void Node::createRoom() {
-    int area = (MINIMUM_WIDTH - 2) * (MINIMUM_HEIGHT - 2);
+    int area = (MINIMUM_WIDTH - 3) * (MINIMUM_HEIGHT - 3);
     int deltaX = 0, deltaY = 0;
     do {
         deltaX = mTopRightX - (getWidth() / 2);

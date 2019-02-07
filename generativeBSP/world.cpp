@@ -38,6 +38,7 @@ void World::populate(Node* node) {
             }
         }
         node->createRoom();
+        
         return;
     }
     populate(node->mLChild);
@@ -51,4 +52,34 @@ void World::draw() {
         }
         std::cout << "\n";
     }
+}
+
+void World::fillCharMap() {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            charMap[i][j] = "😈";
+        }
+    }
+}
+
+void World::drawCharMap() {
+    for (int i = HEIGHT - 1; i >= 0; i--) {
+        for (int j = 0; j < WIDTH; j++) {
+            std::cout << charMap[j][i];
+        }
+        std::cout << "\n";
+    }
+}
+
+void World::populateRooms(Node* node) {
+    if (node->isLeaf()) {
+        for (int h = node->getRoomBLY(); h < node->getRoomTRY(); h++) {
+            for (int w = node->getRoomBLX(); w < node->getRoomTRX(); w++) {
+                charMap[w][h] = "💀";
+            }
+        }
+        return;
+    }
+    populateRooms(node->mLChild);
+    populateRooms(node->mRChild);
 }

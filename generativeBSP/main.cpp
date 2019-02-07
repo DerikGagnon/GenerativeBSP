@@ -22,8 +22,13 @@ int main() {
     tree.expand(6);
     std::cout << root->getHeight() << " " << root->getWidth() << " " << root->mLChild->getHeight() << std::endl;
     // tree.visualize();
+    world.fillCharMap();
     world.populate(root);
     world.draw();
+    std::cout << "\n";
+    world.populateRooms(root);
+    world.drawCharMap();
+    
 
 
     // std::cin.get();

@@ -27,11 +27,15 @@ const std::string EMOJIS[NUM_EMOJIS] = {
 class World {
 private:
     std::string map[WIDTH][HEIGHT];
+    std::string charMap[WIDTH][HEIGHT];
     std::stack<std::string> emojis;
 public:
     World();
     void populate(Node* node);
+    void populateRooms(Node* node);
+    void fillCharMap();
     void draw();
+    void drawCharMap();
 };
 
 #endif /* world_hpp */

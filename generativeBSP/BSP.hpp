@@ -38,6 +38,10 @@ public:
     int getTopRightY(){return mTopRightY;}
     int getBottomLeftX(){return mBottomLeftX;}
     int getBottomLeftY(){return mBottomLeftY;}
+    int getRoomTRX(){return mRoomTRX;}
+    int getRoomTRY(){return mRoomTRY;}
+    int getRoomBLX(){return mRoomBLX;}
+    int getRoomBLY(){return mRoomBLY;}
     int getHeight(){return std::abs(mTopRightY - mBottomLeftY);}
     int getWidth(){return std::abs(mTopRightX - mBottomLeftX);}
     
