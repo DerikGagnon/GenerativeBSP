@@ -148,7 +148,7 @@ void World::fillCharMap() {
 void World::drawCharMap() {
     for (int i = HEIGHT - 1; i >= 0; i--) {
         for (int j = 0; j < WIDTH; j++) {
-            std::cout << charMap[j][i];
+            std::cout << charMap[j][i] << " ";
         }
         std::cout << "\n";
     }
