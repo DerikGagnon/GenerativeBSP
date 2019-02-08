@@ -24,10 +24,11 @@ int main() {
     // tree.visualize();
     world.fillCharMap();
     world.populate(root);
-    world.draw();
+    //world.draw();
     std::cout << "\n";
     world.populateRooms(root);
     world.connectRooms(root, NULL);
+    std::cout << "\n";
     world.drawCharMap();
     
 
