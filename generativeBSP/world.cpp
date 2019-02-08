@@ -124,6 +124,8 @@ void World::connectRooms(Node* node, Node* parent) {
 
             }
         }
+        node->connect();
+        return;
     }
 }
 
