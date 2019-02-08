@@ -64,6 +64,13 @@ int matcher(int topStart, int topEnd, int botStart, int botEnd) {
     return -1;
 }
 
+void World::populateBridges(Node* root) {
+    int i = 0;
+    while (!root->isConnected() && i < 10) {
+        connectRooms(root, NULL);
+        i++;
+    }
+}
 
 void World::connectRooms(Node* node, Node* parent) {
     
@@ -120,6 +127,8 @@ void World::connectRooms(Node* node, Node* parent) {
         node->setRoomBLY(std::min(node->mLChild->getRoomBLY(), node->mRChild->getRoomBLY()));
         node->setRoomTRX(std::max(node->mLChild->getRoomTRX(), node->mRChild->getRoomTRX()));
         node->setRoomTRY(std::max(node->mLChild->getRoomTRY(), node->mRChild->getRoomTRY()));
+        node->connect();
+        return;
     }
     
 }

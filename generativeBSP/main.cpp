@@ -27,7 +27,7 @@ int main() {
     //world.draw();
     std::cout << "\n";
     world.populateRooms(root);
-    world.connectRooms(root, NULL);
+    world.populateBridges(root);
     std::cout << "\n";
     world.drawCharMap();
     
