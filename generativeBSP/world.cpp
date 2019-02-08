@@ -64,6 +64,13 @@ int matcher(int topStart, int topEnd, int botStart, int botEnd) {
     return -1;
 }
 
+void World::populateBridges(Node* root) {
+    int i = 0;
+    while (!root->isConnected() && i < 10) {
+        connectRooms(root, NULL);
+        i++;
+    }
+}
 
 void World::connectRooms(Node* node, Node* parent) {
     
