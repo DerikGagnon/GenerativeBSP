@@ -46,6 +46,22 @@ void Node::setTopRightY(int bottomLeftY) {
     mBottomLeftY = bottomLeftY;
 }
 
+void Node::setRoomTRX(int roomTRX) {
+    mRoomTRX = roomTRX;
+}
+
+void Node::setRoomTRY(int roomTRY) {
+    mRoomTRY = roomTRY;
+}
+
+void Node::setRoomBLX(int roomBLX) {
+    mRoomBLX = roomBLX;
+}
+
+void Node::setRoomBLY(int roomBLY) {
+    mRoomBLY = roomBLY;
+}
+
 void Node::createRoom() {
     int area = (MINIMUM_WIDTH - 3) * (MINIMUM_HEIGHT - 3);
     int deltaX = 0, deltaY = 0;

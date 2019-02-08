@@ -53,6 +53,10 @@ public:
     void setBottomLeftY(int topRightY);
     void setTopRightX(int TopRightX);
     void setTopRightY(int TopRightY);
+    void setRoomTRX(int roomTRX);
+    void setRoomTRY(int roomTRY);
+    void setRoomBLX(int roomBLX);
+    void setRoomBLY(int roomBLY);
     
     //utilities
     bool isTooBig(){return getHeight() > MINIMUM_HEIGHT && getWidth() > MINIMUM_WIDTH;}

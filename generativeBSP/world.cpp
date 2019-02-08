@@ -114,10 +114,14 @@ void World::connectRooms(Node* node, Node* parent) {
                 for (int i = botX; i < topX; i++) {
                     charMap[i][bridgeY] = "O";
                 }
-
             }
         }
+        node->setRoomBLX(std::min(node->mLChild->getRoomBLX(), node->mRChild->getRoomBLX()));
+        node->setRoomBLY(std::min(node->mLChild->getRoomBLY(), node->mRChild->getRoomBLY()));
+        node->setRoomTRX(std::max(node->mLChild->getRoomTRX(), node->mRChild->getRoomTRX()));
+        node->setRoomTRY(std::max(node->mLChild->getRoomTRY(), node->mRChild->getRoomTRY()));
     }
+    
 }
 
 
