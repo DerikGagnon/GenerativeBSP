@@ -46,10 +46,18 @@ void World::populate(Node* node) {
 }
 
 int matcher(int topStart, int topEnd, int botStart, int botEnd) {
-     for (int i = topStart; i < topEnd; i++ ) {
+    int start = 0, end = 0, delta = 0;
+    for (int i = topStart; i < topEnd; i++ ) {
         for (int j = botStart; j < botEnd; j++) {
-            if (i == j) {
-                return i;
+            if ((i == j) && (start == 0)) {
+                start = i;
+                while ((i == j) && (i < topEnd) && (j < botEnd)) {
+                    i++;
+                    j++;
+                }
+                end = i;
+                delta = end - start;
+                return (start + (rand() % delta));
             }
         }
     }
@@ -58,10 +66,13 @@ int matcher(int topStart, int topEnd, int botStart, int botEnd) {
 
 
 void World::connectRooms(Node* node, Node* parent) {
+    
     if (node->isLeaf() || node->isConnected()) {
-        
         return;
     }
+    
+    connectRooms(node->mRChild, node);
+    connectRooms(node->mLChild, node);
     // is not leaf or connected
     // check if either children are leafs
     if (node->mLChild->isLeaf() && node->mRChild->isLeaf()) {
@@ -78,14 +89,13 @@ void World::connectRooms(Node* node, Node* parent) {
             int botEnd = node->mRChild->getRoomTRX();
             int topY = node->mLChild->getRoomBLY();
             int botY = node->mRChild->getRoomTRY();
-            if ( topEnd >= botStart && topStart <= botEnd) {
-                int bridgeX = matcher(topStart, topEnd, botStart, botEnd);
-                std::cout << "they line up at "<<bridgeX << " " << topY << " to " << botY <<" \n";
-                if (bridgeX == -1) {
-                    std::cout << "DO NOT LINE UP "<<topStart <<" "<< topEnd <<" "<< botStart<<" "<< botEnd<< "\n";
-                }
+            int bridgeX = matcher(topStart, topEnd, botStart, botEnd);
+            if (bridgeX == -1) {
+                std::cout << "DO NOT LINE UP "<< topStart <<" "<< topEnd <<" "<< botStart<<" "<< botEnd<< "\n";
+            } else {
+                std::cout << "they line up at "<< bridgeX << " " << topY << " to " << botY <<" \n";
                 for (int i = botY; i < topY; i++) {
-                    charMap[bridgeX][i] = "🌉";
+                    charMap[bridgeX][i] = "O";
                 }
             }
         } else {
@@ -98,20 +108,16 @@ void World::connectRooms(Node* node, Node* parent) {
             int botX = node->mRChild->getRoomTRX();
             int bridgeY = matcher(leftStart, leftEnd, rightStart, rightEnd);
             if (bridgeY == -1) {
-                std::cout << "DO NOT LINE UP "<<leftStart <<" "<< leftEnd <<" "<< rightStart<<" "<< rightEnd<< "\n";
+                std::cout << "DO NOT LINE UP "<< leftStart <<" "<< leftEnd <<" "<< rightStart<<" "<< rightEnd<< "\n";
             } else {
-                std::cout << "they line up at "<<bridgeY << " " << topX << " to " << botX <<" \n";
+                std::cout << "they line up at "<< bridgeY << " " << topX << " to " << botX <<" \n";
                 for (int i = botX; i < topX; i++) {
-                    charMap[i][bridgeY] = "🌉";
+                    charMap[i][bridgeY] = "O";
                 }
 
             }
         }
-        return;
     }
-    
-    connectRooms(node->mLChild, node);
-    connectRooms(node->mRChild, node);
 }
 
 
@@ -127,7 +133,7 @@ void World::draw() {
 void World::fillCharMap() {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            charMap[i][j] = "😈";
+            charMap[i][j] = "-";
         }
     }
 }
@@ -145,7 +151,7 @@ void World::populateRooms(Node* node) {
     if (node->isLeaf()) {
         for (int h = node->getRoomBLY(); h < node->getRoomTRY(); h++) {
             for (int w = node->getRoomBLX(); w < node->getRoomTRX(); w++) {
-                charMap[w][h] = "💀";
+                charMap[w][h] = "O";
             }
         }
         return;
