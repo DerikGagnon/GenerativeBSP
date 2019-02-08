@@ -100,8 +100,14 @@ void World::connectRooms(Node* node, Node* parent) {
                 std::cout << "DO NOT LINE UP "<< topStart <<" "<< topEnd <<" "<< botStart<<" "<< botEnd<< "\n";
             } else {
                 std::cout << "they line up at "<< bridgeX << " " << topY << " to " << botY <<" \n";
-                for (int i = botY; i < topY; i++) {
-                    charMap[bridgeX][i] = "X";
+                // for (int i = botY; i < topY; i++) {
+                //     charMap[bridgeX][i] = "X";
+                // }
+                for (int i = botY; charMap[bridgeX][i] == "-"; i++) {
+                    charMap[bridgeX][i] = "O";
+                }
+                for (int i = botY - 1; charMap[bridgeX][i] == "-"; i--) {
+                    charMap[bridgeX][i] = "O";
                 }
             }
         } else {
@@ -117,8 +123,14 @@ void World::connectRooms(Node* node, Node* parent) {
                 std::cout << "DO NOT LINE UP "<< leftStart <<" "<< leftEnd <<" "<< rightStart<<" "<< rightEnd<< "\n";
             } else {
                 std::cout << "they line up at "<< bridgeY << " " << topX << " to " << botX <<" \n";
-                for (int i = botX; i < topX; i++) {
-                    charMap[i][bridgeY] = "X";
+                // for (int i = botX; i < topX; i++) {
+                //     charMap[i][bridgeY] = "X";
+                // }
+                for (int i = botX; charMap[i][bridgeY] == "-"; i++) {
+                    charMap[i][bridgeY] = "O";
+                }
+                for (int i = botX - 1; charMap[i][bridgeY] == "-"; i--) {
+                    charMap[i][bridgeY] = "O";
                 }
             }
         }
