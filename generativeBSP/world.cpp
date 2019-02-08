@@ -67,6 +67,7 @@ int matcher(int topStart, int topEnd, int botStart, int botEnd) {
 void World::populateBridges(Node* root) {
     int i = 0;
     while (!root->isConnected() && i < 10) {
+        std::cout << "depth: " << i << "\n";
         connectRooms(root, NULL);
         i++;
     }
@@ -78,11 +79,9 @@ void World::connectRooms(Node* node, Node* parent) {
         return;
     }
     
-    connectRooms(node->mRChild, node);
-    connectRooms(node->mLChild, node);
     // is not leaf or connected
     // check if either children are leafs
-    if (node->mLChild->isLeaf() && node->mRChild->isLeaf()) {
+    if ((node->mLChild->isLeaf() || node->mLChild->isConnected()) && (node->mRChild->isLeaf() || node->mRChild->isConnected()) ) {
         std::cout << "connecting l " << node->mLChild->isLeaf() << " r " << node->mRChild->isLeaf() << std::endl;
         // create path connecting child rooms
 
@@ -102,7 +101,7 @@ void World::connectRooms(Node* node, Node* parent) {
             } else {
                 std::cout << "they line up at "<< bridgeX << " " << topY << " to " << botY <<" \n";
                 for (int i = botY; i < topY; i++) {
-                    charMap[bridgeX][i] = "O";
+                    charMap[bridgeX][i] = "X";
                 }
             }
         } else {
@@ -119,7 +118,7 @@ void World::connectRooms(Node* node, Node* parent) {
             } else {
                 std::cout << "they line up at "<< bridgeY << " " << topX << " to " << botX <<" \n";
                 for (int i = botX; i < topX; i++) {
-                    charMap[i][bridgeY] = "O";
+                    charMap[i][bridgeY] = "X";
                 }
             }
         }
@@ -130,6 +129,10 @@ void World::connectRooms(Node* node, Node* parent) {
         node->connect();
         return;
     }
+
+    connectRooms(node->mRChild, node);
+    connectRooms(node->mLChild, node);
+
     
 }
 
